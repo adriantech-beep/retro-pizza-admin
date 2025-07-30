@@ -1,6 +1,6 @@
 export const getUsers = async () => {
   try {
-    const res = await fetch(import.meta.env.VITE_API_USER_URL);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users`);
     const data = await res.json();
 
     const transformedUsers = data.users.map((user) => ({
@@ -16,14 +16,17 @@ export const getUsers = async () => {
 };
 
 export const deleteUserAPI = async (user) => {
-  const res = await fetch(`${import.meta.env.VITE_API_USER_URL}/${user.id}`, {
-    method: "DELETE",
-  });
+  const res = await fetch(
+    `${import.meta.env.VITE_API_URL}/api/users/${user.id}`,
+    {
+      method: "DELETE",
+    }
+  );
   if (!res.ok) throw new Error("Delete failed");
 };
 
 export const updateUser = async ({ id, data }) => {
-  const res = await fetch(`${import.meta.env.VITE_API_USER_URL}/${id}`, {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${id}`, {
     method: "PATCH",
     body: data,
   });
