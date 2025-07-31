@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import axiosInstance from "./axiosInstance";
 
 export const addProduct = async (data) => {
   try {
@@ -20,9 +21,8 @@ export const addProduct = async (data) => {
 
 export const getProducts = async () => {
   try {
-    const res = await fetch(import.meta.env.VITE_API_URL);
-    const data = await res.json();
-    return data.products || [];
+    const { data } = await axiosInstance.get("api/products");
+    return data.products;
   } catch (err) {
     console.error("Failed to fetch products:", err);
     return [];

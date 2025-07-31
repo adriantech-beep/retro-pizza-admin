@@ -10,6 +10,7 @@ import EditProductModal from "../products/EditProductModal";
 
 const Products = () => {
   const { products, isLoading } = useProducts();
+  console.log(products);
 
   const navigate = useNavigate();
   const { mutate: softDeleteProduct } = useSoftDeleteProduct();
