@@ -1,24 +1,12 @@
-import axios from "axios";
-import { toast } from "react-toastify";
 import axiosInstance from "./axiosInstance";
 
-export const addProduct = async (data) => {
-  try {
-    const res = await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/products`,
-      data
-    );
-    return res.data;
-  } catch (err) {
-    if (err.response?.status === 422) {
-      toast.error(err.response.data?.message || "Product already exists.");
-    } else {
-      toast.error("Something went wrong.");
-    }
-    throw err;
-  }
+//done fixing
+export const addProduct = async (product) => {
+  const { data } = await axiosInstance.post("/api/products", product);
+  return data;
 };
 
+//done fixing
 export const getProducts = async () => {
   try {
     const { data } = await axiosInstance.get("api/products");
@@ -27,6 +15,18 @@ export const getProducts = async () => {
     console.error("Failed to fetch products:", err);
     return [];
   }
+};
+
+//done fixing
+export const deleteProduct = async (product) => {
+  const { data } = await axiosInstance.delete(`/api/products/${product.id}`);
+  return data;
+};
+
+//done fixing
+export const softDeleteProduct = async (id) => {
+  const { data } = await axiosInstance.patch(`/api/products/${id}/soft-delete`);
+  return data;
 };
 
 export const getTrashedProducts = async () => {
@@ -41,23 +41,6 @@ export const getTrashedProducts = async () => {
     return [];
   }
 };
-
-export const deleteProduct = async (product) => {
-  try {
-    const res = await fetch(
-      `${import.meta.env.VITE_API_URL}/api/products/${product.id}`,
-      {
-        method: "DELETE",
-      }
-    );
-
-    if (!res.ok) throw new Error("Failed to delete");
-  } catch (err) {
-    console.error("Error deleting:", err);
-    toast.error("Error deleting the product");
-  }
-};
-
 export const updateProduct = async ({ id, data }) => {
   const res = await fetch(
     `${import.meta.env.VITE_API_URL}/api/products/${id}`,
@@ -73,17 +56,6 @@ export const updateProduct = async ({ id, data }) => {
 
   return res.json();
 };
-
-export const softDeleteProduct = async (id) => {
-  const res = await fetch(
-    `${import.meta.env.VITE_API_URL}/api/products/${id}/soft-delete`,
-    {
-      method: "PATCH",
-    }
-  );
-  if (!res.ok) throw new Error("Failed to soft delete product");
-};
-
 export const restoreProduct = async (id) => {
   const res = await fetch(
     `${import.meta.env.VITE_API_URL}/api/products/${id}/restore`,

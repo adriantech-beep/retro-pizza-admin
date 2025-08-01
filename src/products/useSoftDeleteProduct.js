@@ -12,12 +12,12 @@ export const useSoftDeleteProduct = () => {
   return useMutation({
     mutationFn: softDeleteProduct,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries(["products"]);
       navigate("/products");
-      toast.success("Product deleted");
+      toast.success("Product softly deleted");
     },
     onError: () => {
-      toast.error("Failed to delete product");
+      toast.error("Failed to softly delete product");
     },
   });
 };

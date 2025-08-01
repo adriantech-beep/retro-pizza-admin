@@ -18,9 +18,11 @@ const Products = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
+  console.log(selectedProduct);
+
   const handleDelete = useCallback(
     (product) => {
-      navigate(`/products/delete/${product.id}`);
+      navigate(`/products/soft-delete/${product.id}`);
       setSelectedProduct(product);
       setShowModal(true);
     },

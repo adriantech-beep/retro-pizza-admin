@@ -2,9 +2,7 @@ import { useReducer, useCallback, useState } from "react";
 import Input from "../components/Input";
 import ShowPreview from "../components/ShowPreview";
 import { VALIDATOR_REQUIRE } from "../util/validator";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { addProduct } from "../services/apiProducts";
+import { useAddProduct } from "./useAddProduct";
 
 const formReducer = (state, action) => {
   switch (action.type) {
@@ -25,7 +23,7 @@ const formReducer = (state, action) => {
 };
 
 const AddProduct = () => {
-  const navigate = useNavigate();
+  const { mutate: addProduct } = useAddProduct();
   const [showPreview, setShowPreview] = useState(false);
 
   const [formState, dispatch] = useReducer(formReducer, {
@@ -59,14 +57,7 @@ const AddProduct = () => {
     data.append("category", formState.inputs.category.value);
     data.append("image", formState.inputs.image.value);
 
-    try {
-      await addProduct(data);
-      toast.success("Product added successfully");
-      setShowPreview(false);
-      navigate("/products");
-    } catch (err) {
-      console.error(err);
-    }
+    addProduct(data);
   };
 
   return (
