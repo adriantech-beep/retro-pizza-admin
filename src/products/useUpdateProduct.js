@@ -8,7 +8,7 @@ export const useUpdateProduct = () => {
   return useMutation({
     mutationFn: updateProduct,
     onSuccess: () => {
-      queryClient.invalidateQueries(["users"]);
+      queryClient.invalidateQueries(["products"]);
       toast.success("Product updated successfully.");
     },
     onError: () => {

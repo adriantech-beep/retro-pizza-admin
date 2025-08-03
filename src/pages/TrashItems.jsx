@@ -1,14 +1,13 @@
 import Loader from "../components/Loader";
 import { useGetTrashedProducts } from "../products/useGetTrashedProducts";
+import { usePermanentlyDeleteProduct } from "../products/usePermanentlyDeleteProduct";
 import { useRestoreProduct } from "../products/useRestoreProduct";
 
 const TrashItems = () => {
   const { products, isLoading } = useGetTrashedProducts();
   const { mutate: restoreProduct, isPending } = useRestoreProduct();
-
-  const handleRestore = (id) => {
-    restoreProduct(id);
-  };
+  const { mutate: permanentlyDelete, isDeleteting } =
+    usePermanentlyDeleteProduct();
 
   if (isLoading) return <Loader />;
 
@@ -28,12 +27,21 @@ const TrashItems = () => {
               className="bg-[#1a1a2e] p-4 rounded shadow border border-[#ff4d00]/20"
             >
               <h3 className="text-lg font-semibold">{product.name}</h3>
-              <button
-                onClick={() => handleRestore(product.id)}
-                className="mt-2 px-3 py-1 text-sm bg-green-600 rounded hover:bg-green-500"
-              >
-                {isPending ? "Restoring..." : "Restore"}
-              </button>
+
+              <div className="flex gap-2">
+                <button
+                  onClick={() => restoreProduct(product.id)}
+                  className="mt-2 px-3 py-1 text-sm bg-green-600 rounded hover:bg-green-500"
+                >
+                  {isPending ? "Restoring..." : "Restore"}
+                </button>
+                <button
+                  onClick={() => permanentlyDelete(product.id)}
+                  className="mt-2 px-3 py-1 text-sm bg-red-600 rounded hover:bg-red-500"
+                >
+                  {isDeleteting ? "Delete" : "Permanently delete?"}
+                </button>
+              </div>
             </div>
           ))}
         </div>

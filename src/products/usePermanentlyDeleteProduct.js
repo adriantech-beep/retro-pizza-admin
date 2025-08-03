@@ -5,16 +5,16 @@ import { toast } from "react-toastify";
 import { deleteProduct } from "../services/apiProducts";
 import { useNavigate } from "react-router-dom";
 
-export const useDeleteProduct = () => {
+export const usePermanentlyDeleteProduct = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   return useMutation({
     mutationFn: deleteProduct,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries(["products"]);
       navigate("/products");
-      toast.success("Product deleted");
+      toast.success("Product permanently deleted");
     },
     onError: () => {
       toast.error("Failed to delete product");

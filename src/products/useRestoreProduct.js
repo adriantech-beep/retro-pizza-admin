@@ -10,7 +10,6 @@ export const useRestoreProduct = () => {
     mutationFn: restoreProduct,
     onSuccess: () => {
       toast.success("Product restored");
-      // Refresh both trash and products
       queryClient.invalidateQueries({ queryKey: ["products"] });
     },
     onError: () => {

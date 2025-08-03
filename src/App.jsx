@@ -14,6 +14,7 @@ import Signup from "./pages/Signup";
 import TrashItems from "./pages/TrashItems";
 import "react-toastify/dist/ReactToastify.css";
 import AddProductPage from "./pages/AddProductPage";
+import EditProductModal from "./products/EditProductModal";
 
 const queryClient = new QueryClient();
 
@@ -33,8 +34,12 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="add-product" element={<AddProductPage />} />
             <Route path="products" element={<Products />} />
-            <Route
+            {/* <Route
               path="/products/soft-delete/:id"
+              element={<Products showDeleteModal />}
+            /> */}
+            <Route
+              path="/products/:id/soft-delete"
               element={<Products showDeleteModal />}
             />
             <Route path="users" element={<UsersPage />} />
@@ -43,9 +48,10 @@ function App() {
               element={<UsersPage showDeleteModal />}
             />
             <Route path="/trash" element={<TrashItems />} />
+
             <Route
-              path="/products/:id/soft-delete"
-              element={<Products showDeleteModal />}
+              path="/products/:id/edit"
+              element={<Products isEditOpen />}
             />
           </Route>
 

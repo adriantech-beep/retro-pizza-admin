@@ -18,20 +18,22 @@ const Products = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
-  console.log(selectedProduct);
-
   const handleDelete = useCallback(
     (product) => {
-      navigate(`/products/soft-delete/${product.id}`);
+      navigate(`/products/${product.id}/soft-delete`);
       setSelectedProduct(product);
       setShowModal(true);
     },
     [navigate]
   );
-  const handleEditClick = useCallback((product) => {
-    setSelectedProduct(product);
-    setIsEditOpen(true);
-  }, []);
+  const handleEditClick = useCallback(
+    (product) => {
+      navigate(`/products/${product.id}/edit`);
+      setSelectedProduct(product);
+      setIsEditOpen(true);
+    },
+    [navigate]
+  );
 
   const confirmDelete = useCallback(() => {
     softDeleteProduct(selectedProduct.id);

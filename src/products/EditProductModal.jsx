@@ -29,7 +29,7 @@ const EditProductModal = ({ product, onClose }) => {
 
     if (imageUrl) formData.append("image", imageUrl);
 
-    updateProduct({ id, data: formData }, { onSuccess: onClose });
+    updateProduct({ id, product: formData });
   };
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50">
