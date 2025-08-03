@@ -1,39 +1,21 @@
+import axiosInstance from "./axiosInstance";
+
 export const getUsers = async () => {
-  try {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users`);
-    const data = await res.json();
+  const { data } = await axiosInstance.get("/api/users");
 
-    const transformedUsers = data.users.map((user) => ({
-      ...user,
-      id: user._id,
-    }));
-
-    return { users: transformedUsers };
-  } catch (err) {
-    console.error("Failed to fetch users:", err);
-    return [];
-  }
+  const transformedUsers = data.users.map((user) => ({
+    ...user,
+    id: user._id,
+  }));
+  return transformedUsers;
 };
 
 export const deleteUserAPI = async (user) => {
-  const res = await fetch(
-    `${import.meta.env.VITE_API_URL}/api/users/${user.id}`,
-    {
-      method: "DELETE",
-    }
-  );
-  if (!res.ok) throw new Error("Delete failed");
+  const { data } = await axiosInstance.delete(`/api/users/${user.id}`);
+  return data;
 };
 
-export const updateUser = async ({ id, data }) => {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${id}`, {
-    method: "PATCH",
-    body: data,
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to update user");
-  }
-
-  return res.json();
+export const updateUser = async ({ id, user }) => {
+  const { data } = await axiosInstance.patch(`/api/users/${id}`, user);
+  return data;
 };

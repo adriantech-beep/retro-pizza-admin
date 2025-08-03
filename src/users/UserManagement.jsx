@@ -9,8 +9,7 @@ import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
 import EditUserModal from "./EditUsersModal";
 
 const UserManagement = () => {
-  const { data, isLoading } = useUsers();
-  const { users } = data ?? [];
+  const { users = [], isLoading } = useUsers();
   const { mutate: deleteUser } = useDeleteUser();
   const navigate = useNavigate();
 
