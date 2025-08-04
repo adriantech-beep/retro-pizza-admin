@@ -33,10 +33,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="add-product" element={<AddProductPage />} />
             <Route path="products" element={<Products />} />
-            {/* <Route
-              path="/products/soft-delete/:id"
-              element={<Products showDeleteModal />}
-              /> */}
+
             <Route
               path="/products/:id/soft-delete"
               element={<Products showDeleteModal />}
@@ -44,6 +41,10 @@ function App() {
             <Route path="users" element={<UsersPage />} />
             <Route
               path="/users/delete/:id"
+              element={<UsersPage showDeleteModal />}
+            />
+            <Route
+              path="/users/edit/:id"
               element={<UsersPage showDeleteModal />}
             />
             <Route path="/trash" element={<TrashItems />} />

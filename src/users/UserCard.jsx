@@ -1,4 +1,6 @@
-const UserCard = ({ user, onEdit, onDelete }) => {
+import ModalWindow from "../components/ModalWindow";
+
+const UserCard = ({ user, onEdit, handleDeleteClick }) => {
   const { email, role, avatar } = user;
 
   return (
@@ -13,18 +15,22 @@ const UserCard = ({ user, onEdit, onDelete }) => {
         <p className="text-sm text-gray-400 capitalize">Role: {role}</p>
       </div>
       <div className="flex items-center gap-2">
-        <button
-          onClick={() => onEdit(user)}
-          className="text-sm px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded text-white"
-        >
-          Edit
-        </button>
-        <button
-          onClick={() => onDelete(user)}
-          className="text-sm px-3 py-1 bg-red-600 hover:bg-red-500 rounded text-white"
-        >
-          Delete
-        </button>
+        <ModalWindow.Open opens="edit-user">
+          <button
+            onClick={() => onEdit(user)}
+            className="text-sm px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded text-white"
+          >
+            Edit
+          </button>
+        </ModalWindow.Open>
+        <ModalWindow.Open opens="delete-user">
+          <button
+            onClick={() => handleDeleteClick(user)}
+            className="text-sm px-3 py-1 bg-red-600 hover:bg-red-500 rounded text-white"
+          >
+            Delete
+          </button>
+        </ModalWindow.Open>
       </div>
     </div>
   );

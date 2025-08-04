@@ -1,8 +1,10 @@
-import { useSoftDeleteProduct } from "../products/useSoftDeleteProduct";
-
-const ConfirmDeleteModal = ({ product, onCloseModal }) => {
-  const { name } = product;
-  const { mutate: softDeleteProduct } = useSoftDeleteProduct();
+const ConfirmDeleteModal = ({
+  item = {},
+  identifierKey,
+  onConfirmDelete,
+  onCloseModal,
+}) => {
+  const displayValue = item?.[identifierKey];
   return (
     <div className="bg-[#0f0f1e] border border-[#ff4d00]/30 text-white rounded-xl p-6 w-full max-w-sm shadow-lg animate-fadeIn">
       <h2 className="text-xl font-bold text-[#ff4d00] mb-3">
@@ -10,8 +12,8 @@ const ConfirmDeleteModal = ({ product, onCloseModal }) => {
       </h2>
       <p className="mb-4 text-sm">
         Are you sure you want to delete
-        <span className="font-semibold text-red-400">{name}</span>? This action
-        cannot be undone.
+        <span className="font-semibold text-red-400">{displayValue}</span>? This
+        action cannot be undone.
       </p>
       <div className="flex justify-end gap-3">
         <button
@@ -21,7 +23,7 @@ const ConfirmDeleteModal = ({ product, onCloseModal }) => {
           Cancel
         </button>
         <button
-          onClick={() => softDeleteProduct(product.id)}
+          onClick={() => onConfirmDelete(item)}
           className="px-4 py-2 rounded bg-[#ff4d00] hover:bg-[#e94300] font-semibold"
         >
           Yes, Delete

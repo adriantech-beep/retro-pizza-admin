@@ -6,10 +6,13 @@ import ProductsList from "../components/ProductsList";
 import ModalWindow from "../components/ModalWindow";
 import EditProductModal from "../products/EditProductModal";
 import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
+import { useSoftDeleteProduct } from "../products/useSoftDeleteProduct";
 
 const Products = () => {
   const { products = [], isLoading } = useProducts();
   const [productDetails, setProductDetails] = useState(null);
+  const { mutate: softDeleteProduct } = useSoftDeleteProduct();
+
   const navigate = useNavigate();
 
   const handleEditItem = useCallback(
@@ -49,7 +52,13 @@ const Products = () => {
         <EditProductModal product={productDetails} />
       </ModalWindow.Window>
       <ModalWindow.Window name="delete-product">
-        <ConfirmDeleteModal product={productDetails} />
+        <ConfirmDeleteModal
+          item={productDetails}
+          identifierKey="name"
+          onConfirmDelete={(productDetails) =>
+            softDeleteProduct(productDetails?.id)
+          }
+        />
       </ModalWindow.Window>
     </ModalWindow>
   );
