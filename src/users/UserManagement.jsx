@@ -14,6 +14,7 @@ const UserManagement = () => {
   const { mutate: deleteUser } = useDeleteUser();
   const navigate = useNavigate();
   const [selectedUser, setSelectedUser] = useState(null);
+  console.log(selectedUser);
 
   const handleDeleteClick = useCallback(
     (user) => {
@@ -51,8 +52,8 @@ const UserManagement = () => {
             <UserCard
               key={user?.id}
               user={user}
-              onEdit={handleEditClick}
-              handleDeleteClick={handleDeleteClick}
+              onEditClick={handleEditClick}
+              onDeleteClick={handleDeleteClick}
             />
           ))}
         </div>

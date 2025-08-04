@@ -1,6 +1,6 @@
 import ModalWindow from "../components/ModalWindow";
 
-const UserCard = ({ user, onEdit, handleDeleteClick }) => {
+const UserCard = ({ user, onEditClick, onDeleteClick }) => {
   const { email, role, avatar } = user;
 
   return (
@@ -17,7 +17,7 @@ const UserCard = ({ user, onEdit, handleDeleteClick }) => {
       <div className="flex items-center gap-2">
         <ModalWindow.Open opens="edit-user">
           <button
-            onClick={() => onEdit(user)}
+            onClick={() => onEditClick(user)}
             className="text-sm px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded text-white"
           >
             Edit
@@ -25,7 +25,7 @@ const UserCard = ({ user, onEdit, handleDeleteClick }) => {
         </ModalWindow.Open>
         <ModalWindow.Open opens="delete-user">
           <button
-            onClick={() => handleDeleteClick(user)}
+            onClick={() => onDeleteClick(user)}
             className="text-sm px-3 py-1 bg-red-600 hover:bg-red-500 rounded text-white"
           >
             Delete
