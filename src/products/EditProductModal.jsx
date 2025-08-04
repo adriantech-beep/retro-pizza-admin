@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useUpdateProduct } from "./useUpdateProduct";
+import { useNavigate } from "react-router-dom";
 
 const EditProductModal = ({ product, onCloseModal }) => {
   const {
@@ -17,6 +18,12 @@ const EditProductModal = ({ product, onCloseModal }) => {
   const [imageUrl, setImageUrl] = useState(null);
 
   const { mutate: updateProduct, isPending } = useUpdateProduct();
+  const navigate = useNavigate();
+
+  const handleCancel = () => {
+    onCloseModal?.();
+    navigate("/products");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -95,7 +102,7 @@ const EditProductModal = ({ product, onCloseModal }) => {
         <div className="flex justify-end gap-3">
           <button
             type="button"
-            onClick={() => onCloseModal?.()}
+            onClick={handleCancel}
             className="px-4 py-2 rounded border border-gray-500 hover:bg-gray-700"
           >
             Cancel

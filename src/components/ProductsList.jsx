@@ -1,12 +1,10 @@
 import ModalWindow from "../components/ModalWindow";
-import EditProductModal from "../products/EditProductModal";
-import ConfirmDeleteModal from "./ConfirmDeleteModal";
 
-const ProductsList = ({ product }) => {
+const ProductsList = ({ product, handleEditItem, handleDeleteItem }) => {
   const { name, imageUrl, category, description, price } = product;
 
   return (
-    <ModalWindow>
+    <>
       <div className="bg-[#0f0f1e] text-[#fff8e7] border border-[#ff4d00]/30 rounded-lg p-4 shadow hover:shadow-lg transition duration-300">
         <img
           src={imageUrl}
@@ -20,25 +18,24 @@ const ProductsList = ({ product }) => {
 
         <div className="flex gap-2">
           <ModalWindow.Open opens="edit-product">
-            <button className="px-3 py-1 text-sm rounded bg-gray-700 hover:bg-gray-600 text-white">
+            <button
+              className="px-3 py-1 text-sm rounded bg-gray-700 hover:bg-gray-600 text-white"
+              onClick={() => handleEditItem(product)}
+            >
               Edit
             </button>
           </ModalWindow.Open>
           <ModalWindow.Open opens="delete-product">
-            <button className="px-3 py-1 text-sm rounded bg-red-600 hover:bg-red-500 text-white">
+            <button
+              className="px-3 py-1 text-sm rounded bg-red-600 hover:bg-red-500 text-white"
+              onClick={() => handleDeleteItem(product)}
+            >
               Delete
             </button>
           </ModalWindow.Open>
         </div>
       </div>
-
-      <ModalWindow.Window name="edit-product">
-        <EditProductModal product={product} />
-      </ModalWindow.Window>
-      <ModalWindow.Window name="delete-product">
-        <ConfirmDeleteModal product={product} />
-      </ModalWindow.Window>
-    </ModalWindow>
+    </>
   );
 };
 

@@ -14,7 +14,6 @@ import Signup from "./pages/Signup";
 import TrashItems from "./pages/TrashItems";
 import "react-toastify/dist/ReactToastify.css";
 import AddProductPage from "./pages/AddProductPage";
-import EditProductModal from "./products/EditProductModal";
 
 const queryClient = new QueryClient();
 
@@ -37,7 +36,7 @@ function App() {
             {/* <Route
               path="/products/soft-delete/:id"
               element={<Products showDeleteModal />}
-            /> */}
+              /> */}
             <Route
               path="/products/:id/soft-delete"
               element={<Products showDeleteModal />}
