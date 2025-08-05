@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../util/auth";
+import { useSignup } from "./useSignup";
 
 const Signup = () => {
   const navigate = useNavigate();
   const currentUser = getCurrentUser();
+  const { mutate: signupUser } = useSignup();
 
   useEffect(() => {
     if (!currentUser || currentUser.role !== "admin") {
@@ -36,17 +37,7 @@ const Signup = () => {
     formData.append("avatar", avatar);
     formData.append("role", role);
 
-    try {
-      const res = await axios.post(
-        "http://localhost:5000/api/users/signup",
-        formData
-      );
-      alert("Signup successful");
-      console.log(res.data);
-    } catch (err) {
-      console.error(err);
-      alert("Signup failed");
-    }
+    signupUser(formData);
   };
 
   return (

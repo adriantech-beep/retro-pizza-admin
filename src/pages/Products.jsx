@@ -1,12 +1,12 @@
 import { useProducts } from "../products/useProducts";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react";
+import { useSoftDeleteProduct } from "../products/useSoftDeleteProduct";
 import Loader from "../components/Loader";
 import ProductsList from "../components/ProductsList";
 import ModalWindow from "../components/ModalWindow";
 import EditProductModal from "../products/EditProductModal";
 import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
-import { useSoftDeleteProduct } from "../products/useSoftDeleteProduct";
 
 const Products = () => {
   const { products = [], isLoading } = useProducts();
