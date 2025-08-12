@@ -14,6 +14,7 @@ import Signup from "./pages/Signup";
 import TrashItems from "./pages/TrashItems";
 import "react-toastify/dist/ReactToastify.css";
 import AddProductPage from "./pages/AddProductPage";
+import Orders from "./pages/Orders";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="add-product" element={<AddProductPage />} />
             <Route path="products" element={<Products />} />
+            <Route path="orders" element={<Orders />} />
 
             <Route
               path="/products/:id/soft-delete"

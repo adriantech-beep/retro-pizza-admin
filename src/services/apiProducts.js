@@ -1,13 +1,13 @@
 import axiosInstance from "./axiosInstance";
 
 export const addProduct = async (product) => {
-  const { data } = await axiosInstance.post("/api/products", product);
+  const { data } = await axiosInstance.post("api/products", product);
   return data;
 };
 
 export const getProducts = async () => {
   try {
-    const { data } = await axiosInstance.get("api/products");
+    const { data } = await axiosInstance.get("/api/products");
     return data.products;
   } catch (err) {
     console.error("Failed to fetch products:", err);
